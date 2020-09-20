@@ -16,34 +16,36 @@ public class testNG_Practices {
 
     WebDriver driver;
 
-
     @BeforeMethod
     public void setUpMethod(){
-        driver= WebDriverFactory.getdriver("chrome");
+        driver = WebDriverFactory.getdriver("chrome");
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
-    }
-
-    @Test
-
-    public void google_Title_verification(){
-
-
+        //1- Go to google
         driver.get("https://www.google.com");
 
-        String expectedTitle = "Google";
-        String actualTitle= driver.getTitle();
-
-        Assert.assertEquals(actualTitle,expectedTitle,"titles are not matching");
     }
-
-
 
     @Test
     public void google_title_verification(){
-        WebElement searchBox = driver.findElement(By.name("q"));
-        searchBox.sendKeys("apple"+ Keys.ENTER);
 
+        System.out.println("google_title_verification test is running");
+        //2- Verify title is google
+        String expectedTitle = "Google";
+        String actualTitle = driver.getTitle();
+
+        Assert.assertEquals(actualTitle, expectedTitle, "Titles are not matching!");
+
+    }
+
+    @Test
+    public void google_search_title_verification(){
+        //go to google --> this part will be taken care of in the beforeMethod
+        //search apple
+        System.out.println("google_search_title_verification test is running");
+        WebElement searchBox = driver.findElement(By.name("q"));
+        searchBox.sendKeys("apple" + Keys.ENTER);
+        //make sure title contains apple
         String expectedInTitle = "apple";
         String actualTitle = driver.getTitle();
 
@@ -59,5 +61,5 @@ public class testNG_Practices {
         driver.close();
     }
 
-}
 
+}
