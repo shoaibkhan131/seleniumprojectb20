@@ -45,6 +45,7 @@ import java.util.concurrent.TimeUnit;
             //Assert
             Assert.assertTrue(actualDate.equals(expectedDate), "Actual date is not equal to expected date");
 
+
             Assert.assertEquals(actualDate, expectedDate, "Actual date is not equal to expected date");
 
             // Assert.fail("I AM FAILING THIS TEST HERE ON PURPOSE");

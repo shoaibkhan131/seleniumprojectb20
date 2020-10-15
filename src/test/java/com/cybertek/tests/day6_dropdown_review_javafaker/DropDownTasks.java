@@ -1,41 +1,39 @@
 package com.cybertek.tests.day6_dropdown_review_javafaker;
 
-import com.cybertek.utilities.WebDriverFactory;
+import com.cybertek.tests.base.TestBase;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.Select;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-public class DropDownTasks {
+public class DropDownTasks extends TestBase {
 
+//
+//    WebDriver driver;
+//    @BeforeMethod
 
-    WebDriver driver;
-    @BeforeMethod
-
-    public void setupMethod(){
-        driver = WebDriverFactory.getdriver("chrome");
-
-
-        driver.manage().window().maximize();
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-        driver.get("http://practice.cybertekschool.com/dropdown");
-
-
-
-
-
-
-    }
+//    public void setupMethod(){
+//        driver = WebDriverFactory.getdriver("chrome");
+//
+//
+//        driver.manage().window().maximize();
+//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+//
+//
+//
+//
+//
+//
+//
+//    }
 
     @Test
     public void test2_verify_state_dropdown() throws  InterruptedException{
 
+        driver.get("http://practice.cybertekschool.com/dropdown");
 
         Select stateDropdown = new Select(driver.findElement(By.xpath("//select[@id='state']")));
         //3. Select Illinois --> selecting by visible text
@@ -93,7 +91,7 @@ public class DropDownTasks {
 
     @Test
     public void test4_multiple_value_select_dropdown() throws InterruptedException{
-
+        driver.get("http://practice.cybertekschool.com/dropdown");
 
         Select multipleSelectDropdown = new Select(driver.findElement(By.xpath("//select[@name='Languages']")));
 
@@ -116,7 +114,25 @@ public class DropDownTasks {
             //Assert.assertTrue(!eachOption.isSelected()); //it will be false boolean value, with ! we make it "true"
 
             // assertFalse method looks for "false" boolean value to pass the test.
-            Assert.assertFalse(eachOption.isSelected());
+            Assert.assertFalse(eachOption.isSelected(),"the options are selected");
         }
+    }
+
+
+    @Test
+    public void test5_html_dropdown_handling(){
+
+
+        driver.get("http://practice.cybertekschool.com/dropdown");
+
+        WebElement websitedropdown = driver.findElement(By.xpath("//div[@class='dropdown']/a"));
+        websitedropdown.click();
+        WebElement facebookLink = driver.findElement(By.xpath("//a[.='Facebook']"));
+
+        facebookLink.click();
+        String actualTitle = driver.getTitle();
+        String expectedTitle = "Facebook - Log In or Sign Up";
+
+        Assert.assertEquals(actualTitle,expectedTitle);
     }
 }
