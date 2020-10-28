@@ -6,7 +6,7 @@ import org.openqa.selenium.chrome.ChromeDriver;
 
 public class P1_Warmup_Task {
 
-    public static void main(String[] args) throws InterruptedException {
+    public static void main(String[] args)  {
 
         WebDriverManager.chromedriver().setup();
 
